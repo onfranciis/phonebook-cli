@@ -47,4 +47,34 @@ public class DatabaseManager {
             System.out.println("❌ Error fetching contacts: " + e.getMessage());
         }
     }
+
+    public void deleteContact(int id) {
+        String query = "DELETE FROM contacts WHERE id = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, id);
+            int rowsDeleted = pstmt.executeUpdate();
+
+            if (rowsDeleted > 0) {
+                System.out.println("✔ Contact deleted successfully!");
+            } else {
+                System.out.println("⚠ No contact found with ID: " + id);
+            }
+        } catch (SQLException e) {
+            System.out.println("❌ Database error: " + e.getMessage());
+        }
+    }
+
 }
+//
+//if (rs.next()) {
+//        System.out.println("\n--- Contact Found ---");
+//            System.out.printf("ID:    %d\n", rs.getInt("id"));
+//        System.out.printf("Name:  %s\n", rs.getString("name"));
+//        System.out.printf("Phone: %s\n", rs.getString("phone"));
+//        System.out.printf("Type:  %s\n", rs.getString("type"));
+//        } else {
+//        System.out.println("⚠ No contact exists with ID: " + id);
+//        }
