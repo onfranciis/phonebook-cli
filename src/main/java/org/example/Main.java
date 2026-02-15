@@ -26,9 +26,9 @@ public class Main {
                     System.out.print("Enter Type (Work/Personal): ");
                     String type = sc.nextLine().trim();
 
-                    if(type.isEmpty() || sc.equals("Work") || sc.equals("Personal")){
+                    if(type.isEmpty() || type.equals("Work") || type.equals("Personal")){
                         type = "Personal";
-                    };
+                    }
 
                     db.addContact(name, phone, type);
                     break;
